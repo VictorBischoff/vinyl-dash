@@ -26,6 +26,10 @@ GETSONGBPM_API_KEY=your_getsongbpm_api_key_here
 
 # Server Configuration
 PORT=4000
+
+# Redis Configuration (optional)
+# Defaults to redis://localhost:6379 if not set
+REDIS_URL=redis://localhost:6379
 ```
 
 **Important:** 
@@ -49,6 +53,27 @@ PORT=4000
 5. Copy the API key and add it to your `.env` file
 
 **Important:** GetSongBPM requires a backlink to GetSongBPM.com in your application. Failure to include this may result in account suspension.
+
+### 4. Start Redis (Caching)
+
+Redis is used for caching API responses to reduce external API calls and improve response times. The application will work without Redis, but caching is recommended for better performance.
+
+**Using Docker Compose (Recommended):**
+
+```bash
+docker-compose up -d
+```
+
+This will start Redis in the background. To stop Redis:
+
+```bash
+docker-compose down
+```
+
+**Note:** If Redis is unavailable, the application will continue to work normally without caching (graceful degradation). Cache TTLs:
+- Collection data: 1 hour
+- Release details: 30 minutes
+- BPM data: 24 hours
 
 ## Running the Application
 

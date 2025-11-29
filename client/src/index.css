@@ -1,171 +1,266 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@import "tailwindcss";
+
+:root {
+  /* Light theme color values */
+  --vd-color-primary: #007bff;
+  --vd-color-primary-soft: #e7f3ff;
+  
+  --vd-color-surface-default: #ffffff;
+  --vd-color-surface-subtle: #f5f5f5;
+  --vd-color-surface-elevated: #ffffff;
+  
+  --vd-color-text-primary: #1a1a1a;
+  --vd-color-text-secondary: #333333;
+  --vd-color-text-muted: #666666;
+  --vd-color-text-on-primary: #ffffff;
+  
+  --vd-color-border-subtle: #e0e0e0;
+  --vd-color-border-strong: #cccccc;
+  
+  --vd-color-focus-ring: #007bff;
+  --vd-color-destructive: #dc3545;
+  --vd-color-destructive-soft: #fee;
+  --vd-color-success: #28a745;
+  --vd-color-warning: #ffc107;
+  --vd-color-error-text: #c33;
+  
+  --vd-shadow-low: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --vd-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --vd-shadow-high: 0 8px 24px rgba(0, 0, 0, 0.2);
+  
+  /* Semantic color tokens - mapped to theme values */
+  --color-primary: var(--vd-color-primary);
+  --color-primary-soft: var(--vd-color-primary-soft);
+  
+  --color-surface-default: var(--vd-color-surface-default);
+  --color-surface-subtle: var(--vd-color-surface-subtle);
+  --color-surface-elevated: var(--vd-color-surface-elevated);
+  
+  --color-text-primary: var(--vd-color-text-primary);
+  --color-text-secondary: var(--vd-color-text-secondary);
+  --color-text-muted: var(--vd-color-text-muted);
+  --color-text-on-primary: var(--vd-color-text-on-primary);
+  
+  --color-border-subtle: var(--vd-color-border-subtle);
+  --color-border-strong: var(--vd-color-border-strong);
+  
+  --color-focus-ring: var(--vd-color-focus-ring);
+  --color-destructive: var(--vd-color-destructive);
+  --color-destructive-soft: var(--vd-color-destructive-soft);
+  --color-success: var(--vd-color-success);
+  --color-warning: var(--vd-color-warning);
+  --color-error-text: var(--vd-color-error-text);
+  
+  /* Spacing tokens - 4px baseline grid */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 40px;
+  
+  /* Typography tokens */
+  --font-display-size: 40px;
+  --font-display-line: 48px;
+  --font-h1-size: 32px;
+  --font-h1-line: 40px;
+  --font-h2-size: 24px;
+  --font-h2-line: 32px;
+  --font-h3-size: 20px;
+  --font-h3-line: 28px;
+  --font-body-size: 17px;
+  --font-body-line: 28px;
+  --font-caption-size: 13px;
+  --font-caption-line: 20px;
+  
+  /* Elevation */
+  --shadow-low: var(--vd-shadow-low);
+  --shadow-medium: var(--vd-shadow-medium);
+  --shadow-high: var(--vd-shadow-high);
+  
+  /* Motion */
+  --motion-fast: 150ms;
+  --motion-medium: 300ms;
+  --motion-slow: 500ms;
+  --motion-ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
-  color: #333;
+[data-theme="dark"] {
+  /* Dark theme color values */
+  --vd-color-primary: #4da6ff;
+  --vd-color-primary-soft: #1a3d5c;
+  
+  --vd-color-surface-default: #1a1a1a;
+  --vd-color-surface-subtle: #2a2a2a;
+  --vd-color-surface-elevated: #2d2d2d;
+  
+  --vd-color-text-primary: #ffffff;
+  --vd-color-text-secondary: #e0e0e0;
+  --vd-color-text-muted: #999999;
+  --vd-color-text-on-primary: #ffffff;
+  
+  --vd-color-border-subtle: #404040;
+  --vd-color-border-strong: #555555;
+  
+  --vd-color-focus-ring: #4da6ff;
+  --vd-color-destructive: #ff6b7a;
+  --vd-color-destructive-soft: #4a1f24;
+  --vd-color-success: #4caf50;
+  --vd-color-warning: #ffb74d;
+  --vd-color-error-text: #ff6b7a;
+  
+  --vd-shadow-low: 0 2px 8px rgba(0, 0, 0, 0.3);
+  --vd-shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.4);
+  --vd-shadow-high: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-#root {
-  min-height: 100vh;
+@theme {
+  /* Colors - Tailwind theme tokens reference base color variables */
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  
+  /* Primary colors - reference base variables directly to avoid circular references */
+  --color-primary: var(--vd-color-primary);
+  --color-primarySoft: var(--vd-color-primary-soft);
+  
+  /* Surface colors */
+  --color-surfaceDefault: var(--vd-color-surface-default);
+  --color-surfaceSubtle: var(--vd-color-surface-subtle);
+  --color-surfaceElevated: var(--vd-color-surface-elevated);
+  
+  /* Text colors */
+  --color-textPrimary: var(--vd-color-text-primary);
+  --color-textSecondary: var(--vd-color-text-secondary);
+  --color-textMuted: var(--vd-color-text-muted);
+  --color-textOnPrimary: var(--vd-color-text-on-primary);
+  --color-textError: var(--vd-color-error-text);
+  
+  /* Border colors */
+  --color-borderSubtle: var(--vd-color-border-subtle);
+  --color-borderStrong: var(--vd-color-border-strong);
+  
+  /* Other colors */
+  --color-focusRing: var(--vd-color-focus-ring);
+  --color-destructive: var(--vd-color-destructive);
+  --color-destructiveSoft: var(--vd-color-destructive-soft);
+  --color-success: var(--vd-color-success);
+  --color-warning: var(--vd-color-warning);
+
+  /* Spacing */
+  --spacing-xs: var(--space-xs);
+  --spacing-sm: var(--space-sm);
+  --spacing-md: var(--space-md);
+  --spacing-lg: var(--space-lg);
+  --spacing-xl: var(--space-xl);
+  --spacing-2xl: var(--space-2xl);
+
+  /* Typography - Font Family */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, Roboto, "Segoe UI", system-ui, sans-serif;
+
+  /* Typography - Font Weights */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* Typography - Font Sizes & Line Heights */
+  --text-display: var(--font-display-size);
+  --text-display--line-height: var(--font-display-line);
+  
+  --text-heading1: var(--font-h1-size);
+  --text-heading1--line-height: var(--font-h1-line);
+  
+  --text-heading2: var(--font-h2-size);
+  --text-heading2--line-height: var(--font-h2-line);
+  
+  --text-heading3: var(--font-h3-size);
+  --text-heading3--line-height: var(--font-h3-line);
+  
+  --text-body: var(--font-body-size);
+  --text-body--line-height: var(--font-body-line);
+  
+  --text-caption: var(--font-caption-size);
+  --text-caption--line-height: var(--font-caption-line);
+
+  /* Border Radius */
+  --radius-none: 0;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-none: none;
+  --shadow-low: var(--shadow-low);
+  --shadow-medium: var(--shadow-medium);
+  --shadow-high: var(--shadow-high);
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Transition Duration */
+  --duration-fast: var(--motion-fast);
+  --duration-medium: var(--motion-medium);
+  --duration-slow: var(--motion-slow);
+
+  /* Transition Timing Function */
+  --ease-standard: var(--motion-ease-standard);
+
+  /* Z-Index */
+  --z-base: 0;
+  --z-header: 10;
+  --z-overlay: 20;
+  --z-modal: 30;
 }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", Inter, Roboto, "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-surface-default);
+    color: var(--color-text-primary);
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
 }
 
-.header {
-  margin-bottom: 2rem;
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    max-height: 2000px;
+    transform: translateY(0);
+  }
 }
 
-.header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  color: #1a1a1a;
+@layer utilities {
+  .animate-slide-down {
+    animation: slideDown var(--motion-medium) var(--motion-ease-standard);
+  }
 }
-
-.filter-input {
-  width: 100%;
-  max-width: 400px;
-  padding: 0.75rem;
-  font-size: 1rem;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-}
-
-.filter-input:focus {
-  outline: none;
-  border-color: #007bff;
-}
-
-.records-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.record-card {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.record-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-}
-
-.record-cover {
-  width: 100%;
-  height: 250px;
-  object-fit: cover;
-  background-color: #e0e0e0;
-}
-
-.record-info {
-  padding: 1rem;
-}
-
-.record-title {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #1a1a1a;
-}
-
-.record-artist {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 0.25rem;
-}
-
-.record-meta {
-  font-size: 0.85rem;
-  color: #888;
-  margin-bottom: 0.5rem;
-}
-
-.bpm-button {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: background-color 0.2s;
-}
-
-.bpm-button:hover:not(:disabled) {
-  background-color: #0056b3;
-}
-
-.bpm-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.bpm-info {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid #eee;
-}
-
-.bpm-info-item {
-  font-size: 0.85rem;
-  margin-bottom: 0.25rem;
-}
-
-.bpm-info-label {
-  font-weight: 600;
-  color: #555;
-}
-
-.loading {
-  text-align: center;
-  padding: 2rem;
-  color: #666;
-}
-
-.error {
-  background-color: #fee;
-  color: #c33;
-  padding: 1rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-}
-
-.app-footer {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid #ddd;
-  text-align: center;
-  color: #888;
-  font-size: 0.9rem;
-}
-
-.footer-link {
-  color: #007bff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.footer-link:hover {
-  text-decoration: underline;
-}
-

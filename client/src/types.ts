@@ -1,3 +1,9 @@
+export interface Track {
+  title: string;
+  position: string;
+  duration?: string;
+}
+
 export interface VinylRecord {
   id: number;
   title: string;
@@ -5,6 +11,7 @@ export interface VinylRecord {
   label: string;
   year: number | null;
   coverImage: string;
+  tracks?: Track[];
 }
 
 export interface BpmInfo {
@@ -24,5 +31,10 @@ export interface CollectionResponse {
     pages: number;
     items: number;
   };
+}
+
+export interface ReleaseDetailsResponse {
+  id: number;
+  tracks: Track[];
 }
 

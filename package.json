@@ -1,0 +1,29 @@
+{
+  "name": "vinyl-dash",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev:server": "bun run server/index.ts",
+    "dev:client": "bun run --cwd client vite",
+    "dev": "bun run --cwd client vite & bun run server/index.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "vite": "^7.2.4"
+  }
+}

@@ -1,0 +1,66 @@
+# Repo-level rules for Cursor
+
+- This project uses Bun as the runtime and package manager. Do not switch to npm, pnpm, or yarn.
+
+## Overall architecture
+
+- The project is a classic client–server setup:
+  - Frontend: Vite + React + TypeScript in the `client/` directory.
+  - Backend: Express + TypeScript in the `server/` directory.
+- Do not replace this architecture with a single Bun.serve-based app.
+- Do not introduce Bun’s HTML imports pattern in this repository.
+
+## Backend (server/)
+
+- The backend lives in the `server/` folder and uses:
+  - Express for the HTTP server and routing.
+  - TypeScript for all source files.
+  - Bun to run the server (`bun server/index.ts` or similar).
+- When generating backend code:
+  - Use Express (`import express from "express";`) for HTTP routing.
+  - Implement REST-style routes under `/api/...`.
+  - Keep Discogs and GetSongBPM API calls on the backend only (never in the frontend).
+  - Read secrets (Discogs token, username, GetSongBPM key, etc.) from `.env` via `dotenv`.
+- Do NOT:
+  - Use `Bun.serve()` in this project.
+  - Use Bun’s HTML imports.
+  - Serve frontend assets directly from Express (the frontend is handled by Vite in dev).
+
+## Frontend (client/)
+
+- The frontend lives in the `client/` folder and uses:
+  - Vite as the build/dev tool.
+  - React + TypeScript for all UI code.
+- When generating frontend code:
+  - Use React function components with hooks.
+  - Use TypeScript with strong typing.
+  - Import from relative paths inside `src/` (e.g., `./api`, `./types`).
+- All network calls from the frontend should:
+  - Use `fetch` against relative `/api/...` URLs.
+  - Assume Vite’s dev server proxies `/api` to `http://localhost:4000`.
+
+## Vite dev server and proxy
+
+- `client/vite.config.ts` must:
+  - Use `@vitejs/plugin-react-swc`.
+  - Configure a dev proxy so that `/api` is proxied to `http://localhost:4000`.
+- Do not remove the Vite proxy; rely on it instead of hardcoding backend URLs in the frontend.
+
+## General code style
+
+- Prefer explicit, typed functions and interfaces/types in TypeScript.
+- Keep shared types (like `VinylRecord`, `BpmInfo`) in `client/src/types.ts` for now.
+- When adding new endpoints or features, keep the separation clear:
+  - Backend: data fetching, external API calls, normalization, and security.
+  - Frontend: presentation, state management, and user interaction.
+
+## Things to avoid
+
+- Do not suggest or generate code that:
+  - Replaces Express with Bun.serve.
+  - Replaces Vite with a custom Bun-only bundling/serving setup.
+  - Calls Discogs or GetSongBPM directly from the browser.
+- Keep the architecture aligned with:
+  - Bun (runtime/package manager)
+  - Express (backend API)
+  - Vite + React + TypeScript (frontend)
